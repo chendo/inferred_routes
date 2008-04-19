@@ -1,4 +1,6 @@
-InferredRoutes
+InferredRoutes plugin
+
+for Rails 2.0
 ==============
 
 DESCRIPTION
@@ -19,32 +21,32 @@ For example: given a nest of routes:
 I don't like to have to specify all of the components of the nest,
 like this:
 
-  teacher_url(@school,@department,@teacher)
+  teacher_path(@school,@department,@teacher)
 
 I would rather just do:
 
-  teacher_url(@teacher)
+  teacher_path(@teacher)
 
 and have the nest be inferred, as if I'd written:
 
-  teacher_url(@teacher.department.school, @teacher.department, @teacher)
+  teacher_path(@teacher.department.school, @teacher.department, @teacher)
 
 Similarly, I'd like a plural route:
 
-  teachers_url(@department)
+  teachers_path(@department)
 
 to be interpreted as:
 
-  teachers_url(@department.school, @department)
+  teachers_path(@department.school, @department)
 
 I'd even like to "fall off the cliff" and specify a route using
 something that isn't technically part of it:
 
-  teachers_url(@teacher)
+  teachers_path(@teacher)
 
 expanding to:
 
-  teachers_url(@teacher.department.school, @teacher.department)
+  teachers_path(@teacher.department.school, @teacher.department)
 
 There's no teacher in the route, but this lets me generate, say, a URL
 for creating a new teacher in the same department as a known teacher.
@@ -57,11 +59,11 @@ USAGE
 
 SINGULAR:
 
-  a_url(z,y,x,...c,b,a)
+  a_path(z,y,x,...c,b,a)
 
 becomes:
 
-  a_url(a)
+  a_path(a)
 
 and z,y,x...c,b will be inferred.  The nest has to match the object
 associations; that is, all of these must be present:
@@ -74,38 +76,52 @@ associations; that is, all of these must be present:
 
 PLURAL:
 
-  as_url(z,y,x,...b)
+  as_path(z,y,x,...b)
 
 becomes:
 
-  as_url(b)
+  as_path(b)
 
 You can also use an 'a':
 
-  as_url(a)
+  as_path(a)
 
 and the b-object will be gleaned from the a.  The cascade of object
 associations has to work all the way through the list.  
 
 
+LIMITATIONS
+
+The plugin doesn't handle cases where a routing segment might not have
+the same name as an association; it just dumbly walks through the segments
+and calls the same-named methods on the objects as it goes. 
+
+It also doesn't work with form_for. At least, my brief experiments suggest
+that it doesn't. I haven't investigated that part fully. 
+
+
 TESTING
 
-I've got tests against a particular application I've written.  (They
-all pass :-)  I haven't packaged the whole test application here.
-I'll work on a non-cumbersome way of doing that....  
+See test/inferred_routes_test.rb. It uses an sqlite3 database and contains
+everything it needs to create the database, create some objects, and test
+some routes. 
 
-Please report any bugs or improvements to me.  Thanks.
+
+BUGS
+
+I don't know of any, but there may well be some. Please report any bugs or
+improvements to me.  Thanks.
 
 
 AUTHOR
 
 inferred_routes is by David A. Black, Director of Ruby Power and
-Light, LLC.  
+Light, LLC.  dblack@rubypal.com, http://www.rubypal.com
 
 
 VERSION
 
-This is inferred_routes version 0.1.0.  
+This is inferred_routes version 0.2.0, April 2008. 
 
 
 COPYRIGHT AND WARRANTY
