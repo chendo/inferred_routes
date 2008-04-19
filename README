@@ -55,6 +55,18 @@ for creating a new teacher in the same department as a known teacher.
 consistency in the examples.)
 
 
+HOW IT WORKS
+
+The routing system processes a list of arguments, and a list of route segments.
+Usually, you're supposed to provide one argument for each segment that has
+to be matched. The plugin figures out that if the argument list is shorter than
+the segment list, then it should be padded by asking for associated objects.
+
+You should be aware of the fact that this potentially involves database hits
+from the view, which some people strongly dislike. (I take a kind of soft
+dislike approach to it.) 
+
+
 USAGE
 
 SINGULAR:
