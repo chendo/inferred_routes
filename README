@@ -111,6 +111,10 @@ and calls the same-named methods on the objects as it goes.
 It also doesn't work with form_for. At least, my brief experiments suggest
 that it doesn't. I haven't investigated that part fully. 
 
+In general, the plugin is simple and partial and somewhat experimental. You
+should keep this in mind, and make sure you're happy with what it's doing, if
+you want to use it. 
+
 
 TESTING
 
